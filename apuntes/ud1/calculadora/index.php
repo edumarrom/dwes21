@@ -11,7 +11,7 @@
     <?php $res=0 ?>
     <?php if(is_numeric($_GET['x'])): ?>
         <?php if(is_numeric($_GET['y'])): ?>
-            <?php switch ($_GET['operacion']) {
+            <?php switch ($_GET['oper']) {
                 case 'suma':
                     $res= $_GET['x'] + $_GET['y'];
                     break;
