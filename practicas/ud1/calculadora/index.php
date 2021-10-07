@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,88 +7,28 @@
     <title>Calculadora</title>
 </head>
 <body>
+    <?php require 'calculadora.php' ?>
     <h1>Calculadora</h1>
-    <?php
-    function filtrar_numero($operando, &$errores)
-    {
-        $valor = null;
-        if (isset($_GET[$operando])) {
-            $valor = trim($_GET[$operando]);
-            if (!is_numeric($valor)) {
-                $errores[] = "El operando '$valor' no es correcto.";
-            }
-        } else {
-            $errores[] = "Falta el operando '$operando'.";
-        }
-        return $valor;
-    }
-
-    function filtrar_opciones($operador, $opciones, &$errores)
-    {
-        $oper = null;
-        global $error;
-        if (isset($_GET[$operador])) {
-            $oper = trim($_GET[$operador]);
-            if (!in_array($oper, $opciones)) {
-                $errores[] = "El operador '$oper' no es correcto.";
-            }
-        } else {
-            $errores[] = 'Falta el operador.';
-        }
-        return $oper;
-    }
-
-    function mostrar_errores(&$errores)
-    {
-        foreach ($errores as $err): ?>
-            <p>Error: <?=$err ?></p>
-        <?php endforeach;
-    }
-
-    // Control de errores en operaciones
-    function es_cero($operando, &$errores)
-    {
-        if(!$operando) {
-            $errores[] = "No se puede dividir entre cero.";
-        }
-        else {
-            return false;
-        }
-    }
-    ?>
-
-    <?php
-    $error = [];
-    $x = filtrar_numero('x', $error);
-    $y = filtrar_numero('y', $error);
-    $oper = filtrar_opciones('oper', ['suma', 'resta', 'multi', 'divi'], $error);
-
-    if(empty($error)): ?>
-        <?php switch ($oper) {
-            case 'suma':
-                $res= $x + $y;
-                break;
-            case 'resta':
-                $res= $x - $y;
-                break;
-            case 'multi':
-                $res= $x * $y;
-                break;
-            case 'divi':
-                if (es_cero($y, $error)){
-                    $res= $x / $y;
-                }
-                break;
-        }
-        if(empty($error)): ?>
-            <h2>El resultado es <?=$res ?></h2>
-        <?php else : ?>
-            <?php mostrar_errores($error);
-            endif
-        ?>
-
-
-    <?php endif ?>
-    <a href="index.html">Volver</a>
-</body>
+    <form action='calcular.php' method="GET">
+        <div>
+            <label for="op1">Primer operando: </label>
+            <input id ="op1" type="text" name="x" size="10"/>
+        </div>
+        <div>
+            <label for="op2">Segundo operando: </label>
+            <input id ="op2" type="text" name="y" size="10"/>
+        </div>
+        <div>
+            <label for="oper">Operación: </label>
+            <select name="oper" id="oper">
+                <?php foreach (OPER as $oper): ?>
+                    <option value="<?=$oper?>"> <?=$oper?> </option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Realizar</button>
+        </div>
+    </form>
+    </body>
 </html>
