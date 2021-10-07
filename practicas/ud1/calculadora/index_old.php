@@ -32,5 +32,6 @@
     <?php else: ?>
         <p>Falta operando x.</p>
     <?php endif ?>
+    <a href="index.html">Volver</a>
 </body>
 </html>
