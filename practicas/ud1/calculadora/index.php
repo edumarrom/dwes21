@@ -44,6 +44,17 @@
             <p>Error: <?=$err ?></p>
         <?php endforeach;
     }
+
+    // Control de errores en operaciones
+    function es_cero($operando, &$errores)
+    {
+        if(!$operando) {
+            $errores[] = "No se puede dividir entre cero.";
+        }
+        else {
+            return false;
+        }
+    }
     ?>
 
     <?php
@@ -51,7 +62,6 @@
     $x = filtrar_numero('x', $error);
     $y = filtrar_numero('y', $error);
     $oper = filtrar_opciones('oper', ['suma', 'resta', 'multi', 'divi'], $error);
-    mostrar_errores($error);
 
     if(empty($error)): ?>
         <?php switch ($oper) {
@@ -65,10 +75,19 @@
                 $res= $x * $y;
                 break;
             case 'divi':
-                $res= $x / $y;
+                if (es_cero($y, $error)){
+                    $res= $x / $y;
+                }
                 break;
-        } ?>
-        <h2>El resultado es <?=$res ?></h2>
+        }
+        if(empty($error)): ?>
+            <h2>El resultado es <?=$res ?></h2>
+        <?php else : ?>
+            <?php mostrar_errores($error);
+            endif
+        ?>
+
+
     <?php endif ?>
     <a href="index.html">Volver</a>
 </body>
