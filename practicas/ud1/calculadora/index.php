@@ -7,22 +7,32 @@
     <title>Calculadora</title>
 </head>
 <body>
-    <?php require 'calculadora.php' ?>
+    <?php
+        require 'calculadora.php';
+        $error = [];
+        $x = filtrar_operando('x', $error);
+        $y = filtrar_operando('y', $error);
+        $oper = filtrar_operador('oper', OPER, $error);
+    ?>
     <h1>Calculadora</h1>
-    <form action='calcular.php' method="GET">
+    <!-- TODO: Y si quitamos el action? -->
+    <form action="" method="GET">
         <div>
+            <!-- TODO: Primer operando acumulador -->
             <label for="op1">Primer operando: </label>
-            <input id ="op1" type="text" name="x" size="10"/>
+            <input id ="op1" type="text" name="x" size="10" value="<?= $x ?>"/>
         </div>
         <div>
             <label for="op2">Segundo operando: </label>
-            <input id ="op2" type="text" name="y" size="10"/>
+            <input id ="op2" type="text" name="y" size="10" value="<?= $y ?>"/>
         </div>
         <div>
             <label for="oper">Operación: </label>
             <select name="oper" id="oper">
-                <?php foreach (OPER as $oper): ?>
-                    <option value="<?=$oper?>"> <?=$oper?> </option>
+                <?php foreach (OPER as $op): ?>
+                    <option value="<?=$op?>" <?= selected($op, $oper) ?>>
+                    <?= $op ?>
+                    </option>
                 <?php endforeach ?>
             </select>
         </div>
@@ -30,5 +40,15 @@
             <button type="submit">Realizar</button>
         </div>
     </form>
+
+    <?php
+        if(isset($x, $y, $oper)) :
+            if(empty($error)): ?>
+                <?php $resultado=calcular($x, $y, $oper, $error)?>
+                <h2>El resultado es <?=$resultado ?></h2>
+            <?php else : ?>
+                <?php mostrar_errores($error) ?>
+            <?php endif ?>
+        <?php endif ?>
     </body>
 </html>

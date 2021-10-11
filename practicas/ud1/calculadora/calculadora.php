@@ -19,11 +19,11 @@
         $valor = null;
         if (isset($_GET[$operando])) {
             $valor = trim($_GET[$operando]);
-            if (!is_numeric($valor)) {
+            if($valor === '') {
+                $errores[] = "El operando $operando es obligatorio.";
+            } elseif (!is_numeric($valor)) {
                 $errores[] = "El operando '$valor' no es correcto.";
             }
-        } else {
-            $errores[] = "Falta el operando '$operando'.";
         }
         return $valor;
     }
@@ -52,8 +52,6 @@
             if (!in_array($oper, $opciones)) {
                 $errores[] = "El operador '$oper' no es correcto.";
             }
-        } else {
-            $errores[] = 'Falta el operador.';
         }
         return $oper;
     }
@@ -97,6 +95,11 @@
         else {
             return false;
         }
+    }
+
+    function selected($a, $b)
+    {
+        ($a == $b)? 'selected' : '';
     }
 
     /**

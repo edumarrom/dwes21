@@ -1,0 +1,120 @@
+emr@alumno-p7-pc4:~/github/dwes21/practicas/ud1/calculadora$ psysh
+Psy Shell v0.10.8 (PHP 8.0.11 — cli) by Justin Hileman
+>>> $dti = new DateTimeImmutable();
+=> DateTimeImmutable @1633971523 {#2562
+     date: 2021-10-11 16:58:43.574246 UTC (+00:00),
+   }
+>>> $dti
+=> DateTimeImmutable @1633971523 {#2562
+     date: 2021-10-11 16:58:43.574246 UTC (+00:00),
+   }
+>>> $frase='';
+=> ""
+>>> $frase = $dti->format('d-m-Y');
+=> "11-10-2021"
+>>> $frase
+=> "11-10-2021"
+>>> $frase = $dti->format('d-m-Y H:i:s');
+=> "11-10-2021 16:58:43"
+>>> time()
+=> 1633972070
+>>> date()
+TypeError: date() expects at least 1 argument, 0 given
+>>> date(Y-m-d H:i:s' )
+PHP Parse error: Syntax error, unexpected T_STRING, expecting ')' on line 1
+>>> date('Y-m-d H:i:s' )
+=> "2021-10-11 17:08:54"
+>>> $dti->add(new DateInterval('P1D'))
+=> DateTimeImmutable @1634057923 {#2564
+     date: 2021-10-12 16:58:43.574246 UTC (+00:00),
+   }
+>>> $otro = $dti->add(new DateInterval('P1D'))
+=> DateTimeImmutable @1634057923 {#2569
+     date: 2021-10-12 16:58:43.574246 UTC (+00:00),
+   }
+>>> $otro - $dti
+TypeError: Unsupported operand types: DateTimeImmutable - DateTimeImmutable
+>>> $dti->diff($otro);
+=> DateInterval {#2577
+     interval: + 1d,
+   }
+>>> $otro->diff($dti);
+=> DateInterval {#2564
+     interval: - 1d,
+   }
+>>> $diferencia = $otro->diff($dti);
+=> DateInterval {#2563
+     interval: - 1d,
+   }
+>>> $diferencia->$days
+<warning>PHP Warning:  Undefined variable $days in phar://eval()'d code on line 1</warning>
+<warning>PHP Warning:  Undefined property: DateInterval::$ in phar://eval()'d code on line 1</warning>
+=> null
+>>> $diferencia->days
+=> 1
+>>> $diferencia->years
+<warning>PHP Warning:  Undefined property: DateInterval::$years in phar://eval()'d code on line 1</warning>
+=> null
+>>> $diferencia->days
+=> 1
+>>> $diferencia->invert
+=> 1
+>>> $diferencia = $dti->diff($otro);
+=> DateInterval {#2576
+     interval: + 1d,
+   }
+>>> $diferencia->days
+=> 1
+>>> $diferencia->invert
+=> 0
+>>> $dti->days
+<warning>PHP Warning:  Undefined property: DateTimeImmutable::$days in phar://eval()'d code on line 1</warning>
+=> null
+>>> $frase->days
+<warning>PHP Warning:  Attempt to read property "days" on string in phar://eval()'d code on line 1</warning>
+=> null
+>>> $dti->pepe = 4
+=> 4
+>>> $dti
+=> DateTimeImmutable @1633971523 {#2562
+     +"pepe": 4,
+     date: 2021-10-11 16:58:43.574246 UTC (+00:00),
+   }
+>>> unset($dti->pepe)
+>>> $dti
+=> DateTimeImmutable @1633971523 {#2562
+     date: 2021-10-11 16:58:43.574246 UTC (+00:00),
+   }
+>>> $dt 0 new DateTime();
+PHP Parse error: Syntax error, unexpected T_LNUMBER on line 1
+>>> $dt = new DateTime();
+=> DateTime @1633972823 {#2564
+     date: 2021-10-11 17:20:23.589208 UTC (+00:00),
+   }
+>>> $dt->add(new DateInterval('P1D));
+PHP Parse error: Syntax error, unexpected T_ENCAPSED_AND_WHITESPACE on line 1
+>>> $dt->add(new DateInterval('P1D'));
+=> DateTime @1634059223 {#2564
+     date: 2021-10-12 17:20:23.589208 UTC (+00:00),
+   }
+>>> $dt->format('H:i:s');
+=> "17:20:23"
+>>> $dt->setTime
+setTime       setTimestamp  setTimezone
+>>> $dt->setTime
+setTime       setTimestamp  setTimezone
+>>> $dt->setTimezone(new DateTimeZone('Europe/Madrid'));
+=> DateTime @1634059223 {#2564
+     date: 2021-10-12 19:20:23.589208 Europe/Madrid (+02:00),
+   }
+>>> $dt->format('H:i:s');
+=> "19:20:23"
+>>> $dt->setTimezone(new DateTimeZone('UTC'));
+=> DateTime @1634059223 {#2564
+     date: 2021-10-12 17:20:23.589208 UTC (+00:00),
+   }
+>>> $dt->format('H:i:s');
+=> "17:20:23"
+>>> $dti->setTimezone(new DateTimeZone('Europe/Madrid'))->format('H:i:s');
+=> "18:58:43"
+>>>
