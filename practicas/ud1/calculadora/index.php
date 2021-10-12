@@ -30,7 +30,7 @@
             <label for="oper">Operación: </label>
             <select name="oper" id="oper">
                 <?php foreach (OPER as $op): ?>
-                    <option value="<?=$op?>" <?= selected($op, $oper) ?>>
+                    <option value="<?=$op?>">
                     <?= $op ?>
                     </option>
                 <?php endforeach ?>
@@ -43,12 +43,16 @@
 
     <?php
         if(isset($x, $y, $oper)) :
-            if(empty($error)): ?>
-                <?php $resultado=calcular($x, $y, $oper, $error)?>
+            if(empty($error)) {
+                $resultado=calcular($x, $y, $oper, $error);
+            }
+
+            /* TODO: Evitar comprobar dos veces lo mismo... */
+            if(empty($error)) : ?>
                 <h2>El resultado es <?=$resultado ?></h2>
-            <?php else : ?>
-                <?php mostrar_errores($error) ?>
-            <?php endif ?>
-        <?php endif ?>
-    </body>
+            <?php else :
+                mostrar_errores($error);
+            endif;
+        endif?>
+</body>
 </html>

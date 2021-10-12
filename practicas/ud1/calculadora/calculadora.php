@@ -82,22 +82,25 @@
      * Comprueba si un operando recibido mediante GET es cero. Si lo es, volcará
      * el incidenteen el array de errores. No devuelve nada.
      *
-     * @param  mixed    $operando   El operando a comprobar
-     * @param  mixed    $errores    El array de volcado de errores
-     * @return void                 Vuelca, si se produce, el error
+     * @param  string    $operando   El operando a comprobar
+     * @param  array    $errores    El array de volcado de errores
+     * @return bool                 Vuelca, si se produce, el error
      *                              en el array de errores.
      */
-    function es_cero($operando, &$errores)
+    function es_cero(string $operando, &$errores): bool
     {
+        $resultado = false;
         if(!$operando) {
             $errores[] = "No se puede dividir entre cero.";
+            $resultado = false;
         }
         else {
-            return false;
+            $resultado = true;
         }
+        return $resultado;
     }
 
-    function selected($a, $b)
+    function selected(string $a, string $b): void
     {
         ($a == $b)? 'selected' : '';
     }
@@ -119,29 +122,26 @@
     ): int|float|null
     {
         $res = null;
-        if(empty($errores)): ?>
-            <?php switch ($oper) {
-                case '+':
-                    $res= $x + $y;
-                    break;
-                case '-':
-                    $res= $x - $y;
-                    break;
-                case '*':
-                    $res= $x * $y;
-                    break;
-                case '/':
-                    if (es_cero($y, $errores)){
-                        $res= $x / $y;
-                    } else {
-                        $res = null;
-                    }
-                    break;
-                default:
+            switch ($oper) {
+            case '+':
+                $res= $x + $y;
+                break;
+            case '-':
+                $res= $x - $y;
+                break;
+            case '*':
+                $res= $x * $y;
+                break;
+            case '/':
+                if (es_cero($y, $errores)){
+                    $res= $x / $y;
+                } else {
                     $res = null;
-                    break;
-            }?>
-        <?php endif;
-
+                }
+                break;
+            default:
+                $res = null;
+                break;
+            }
         return $res;
     }
