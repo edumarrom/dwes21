@@ -13,26 +13,6 @@
         return $valor;
     }
 
-    /* function filtrar_fecha(string $fecha, &$errores): ?string
-    {
-        $valor = null;
-        if (isset($_GET[$fecha])) {
-            $valor = trim($_GET[$fecha]);
-            if($valor === '') {
-                $errores[] = "La fecha de nacimiento es obligatoria.";
-            } else {
-                $aux = new DateTime($valor);
-                $anyo = $aux->format('Y');
-                $mes = $aux->format('m');
-                $dia = $aux->format('d');
-                if (!checkdate($mes, $dia, $anyo)) {
-                $errores[] = "La fecha '$fecha' no es correcto.";
-                }
-            }
-        }
-        return $valor;
-    } */
-
     function filtrar_fecha(string $fecha, &$errores): ?string
     {
        $valor = null;
