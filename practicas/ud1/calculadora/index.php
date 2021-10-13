@@ -43,16 +43,14 @@
 
     <?php
         if(isset($x, $y, $oper)) :
-            if(empty($error)) {
-                $resultado=calcular($x, $y, $oper, $error);
-            }
-
-            /* TODO: Evitar comprobar dos veces lo mismo... */
-            if(empty($error)) : ?>
-                <h2>El resultado es <?=$resultado ?></h2>
-            <?php else :
-                mostrar_errores($error);
-            endif;
-        endif?>
+            if(empty($error)) :
+                $resultado=calcular($x, $y, $oper, $error) ?>
+                <?php if($resultado != null) : ?>
+                    <h2><?=$x?> <?=$oper?> <?=$y?> = <?=$resultado ?></h2>
+                <?php endif ?>
+            <?php endif;
+        endif;
+        mostrar_errores($error);
+    ?>
 </body>
 </html>
