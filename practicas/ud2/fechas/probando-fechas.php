@@ -1,2 +1,0 @@
-<?php
-$dti = new DateTimeImmutable();

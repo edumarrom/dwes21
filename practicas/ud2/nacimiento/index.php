@@ -10,8 +10,8 @@
     <?php
         require 'auxiliar.php';
         $error = [];
-        $nombre = 'nombre';
-        $ape = 'ape';
+        $nombre = filtrar_cadena('nombre', $error);
+        $ape = filtrar_cadena('ape', $error);
         $fechaNac = filtrar_fecha('fechaNac', $error);
     ?>
     <h1>Formulario</h1>
@@ -23,13 +23,13 @@
         </div>
         <div>
             <label>Apellidos:
-                <input type="text" name="nombre" size="10" value="<?= $ape ?>"/>
+                <input type="text" name="ape" size="10" value="<?= $ape ?>"/>
             </label>
         </div>
         <div>
             <label>Fecha de nacimiento:
-                <!-- TODO: Cambiar tipo del input a Fecha -->
-                <input type="text" name="fechaNac" size="10" value="<?= $fechaNac ?>" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
+                <input type="date" name="fechaNac" size="10" value="<?= $fechaNac ?>"/>
+                <!-- <input type="text" name="fechaNac" size="10" value="<?= $fechaNac ?>" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"/> -->
             </label>
         </div>
         <div>
@@ -39,8 +39,14 @@
 
     <?php
         if(isset($nombre, $ape, $fechaNac)) :
-            $edad=calcular_edad($fechaNac, $error); ?>
-            <h2>Edad (en años): <?= $edad ?></h2>
-        <?php endif ?>
+            if(empty($error)):
+                $edad=calcular_edad($fechaNac, $error);
+                if ($edad != null) : ?>
+                    <h2>Edad (en años): <?= $edad ?></h2>
+                <?php endif;
+            endif;
+        endif;
+        mostrar_errores($error);
+    ?>
 </body>
 </html>
