@@ -1,0 +1,132 @@
+emr@alumno-p7-pc4:~/github/dwes21/practicas/ud1/calculadora$ psysh
+Psy Shell v0.10.8 (PHP 8.0.11 — cli) by Justin Hileman
+>>> $o = new DateTime();
+=> DateTime @1634138765 {#2562
+     date: 2021-10-13 15:26:05.217947 UTC (+00:00),
+   }
+>>> $o->format('Y-m-d')
+=> "2021-10-13"
+>>> $o
+=> DateTime @1634138765 {#2562
+     date: 2021-10-13 15:26:05.217947 UTC (+00:00),
+   }
+>>> $o instanceof DateTime
+=> true
+>>> var_dum($o)
+PHP Fatal error:  Call to undefined function var_dum() in Psy Shell code on line 1
+>>> var_dump($o)
+object(DateTime)#2562 (3) {
+  ["date"]=>
+  string(26) "2021-10-13 15:26:05.217947"
+  ["timezone_type"]=>
+  int(3)
+  ["timezone"]=>
+  string(3) "UTC"
+}
+=> null
+>>> print_r($o)
+DateTime Object
+(
+    [date] => 2021-10-13 15:26:05.217947
+    [timezone_type] => 3
+    [timezone] => UTC
+)
+=> true
+>>> 
+emr@alumno-p7-pc4:~/github/dwes21/practicas/ud1/calculadora$ psysh
+Psy Shell v0.10.8 (PHP 8.0.11 — cli) by Justin Hileman
+>>> print_r($u)
+<warning>PHP Warning:  Undefined variable $u in phar://eval()'d code on line 1</warning>
+=> true
+>>> print_r(null)
+=> true
+>>> DateTime::ATOM
+=> "Y-m-d\TH:i:sP"
+>>> $ejemplo = DateInterval.createFromDateString('2021-10-13')
+PHP Fatal error:  Call to undefined function createFromDateString() in Psy Shell code on line 1
+>>> DateInterval.createFromDateString('2021-10-13')
+PHP Fatal error:  Call to undefined function createFromDateString() in Psy Shell code on line 1
+>>> $ejemplo = new DateTime('now');
+=> DateTime @1634143967 {#2569
+     date: 2021-10-13 16:52:47.585311 UTC (+00:00),
+   }
+>>> $ejemplo = new DateTime('2020-11-20');
+=> DateTime @1605830400 {#2562
+     date: 2020-11-20 00:00:00.0 UTC (+00:00),
+   }
+>>> $ejemplo->year
+<warning>PHP Warning:  Undefined property: DateTime::$year in phar://eval()'d code on line 1</warning>
+=> null
+>>> $ejemplo->year()
+PHP Error:  Call to undefined method DateTime::year() in phar://eval()'d code on line 1
+>>> $ejemplo->format('Y')
+=> "2020"
+>>> $nacimiento = new DateTime('now');
+=> DateTime @1634144532 {#2579
+     date: 2021-10-13 17:02:12.965789 UTC (+00:00),
+   }
+>>> $nacimiento = new DateTime('2020-11-20');
+=> DateTime @1605830400 {#2578
+     date: 2020-11-20 00:00:00.0 UTC (+00:00),
+   }
+>>> $nacimiento::Diff
+PHP Error:  Undefined constant DateTime::Diff in phar://eval()'d code on line 1
+>>> $ejemplo = new DateInterval(4)
+Exception with message 'DateInterval::__construct(): Unknown or bad format (4)'
+>>> $ejemplo = new DateInterval($nacimiento)
+TypeError: DateInterval::__construct(): Argument #1 ($duration) must be of type string, DateTime given
+>>> $ejemplo = $nacimiento->diff(new DateTime('now'))
+=> DateInterval {#2574
+     interval: + 10m 23d 17:05:03.701976,
+   }
+>>> $ejemplo = $nacimiento->diff(new DateTime('now'))
+=> DateInterval {#2576
+     interval: + 10m 23d 17:07:58.199889,
+   }
+>>> $ejemplo = $nacimiento->diff(new DateTime('now'))->format('Y')
+=> "Y"
+>>> $ejemplo = $nacimiento->diff(new DateTime('now'))
+=> DateInterval {#2567
+     interval: + 10m 23d 17:08:35.248644,
+   }
+>>> $ejemplo->format('Y')
+=> "Y"
+>>> $ejemplo->format('Y-m-d')
+=> "Y-m-d"
+>>> $ejemplo
+=> DateInterval {#2567
+     interval: + 10m 23d 17:08:35.248644,
+   }
+>>> $ejemplo->format()
+TypeError: DateInterval::format() expects exactly 1 argument, 0 given
+>>> $ejemplo->format('UTC')
+=> "UTC"
+>>> $ejemplo->format('PAQUITO')
+=> "PAQUITO"
+>>> $ejemplo->format('y')
+=> "y"
+>>> $ejemplo->format('%y')
+=> "0"
+>>> $ejemplo->format('%m')
+=> "10"
+>>> $ejemplo->format('%y')
+=> "0"
+>>> 
+emr@alumno-p7-pc4:~/github/dwes21/practicas/ud1/calculadora$ psysh 
+Psy Shell v0.10.8 (PHP 8.0.11 — cli) by Justin Hileman
+>>> $nacimiento = new DateTime('2020-11-20'),
+PHP Parse error: Syntax error, unexpected ',' on line 1
+>>> $nacimiento = new DateTime('1993-11-20')
+=> DateTime @753753600 {#2567
+     date: 1993-11-20 00:00:00.0 UTC (+00:00),
+   }
+>>> $nacimiento->diff(new DateTime('now'))->format(%y)
+PHP Parse error: Syntax error, unexpected '%' on line 1
+>>> $nacimiento->diff(new DateTime('now'))->format(%y)
+PHP Parse error: Syntax error, unexpected '%' on line 1
+>>> $edad = $nacimiento->diff(new DateTime('now'))->format(%y)
+PHP Parse error: Syntax error, unexpected '%' on line 1
+>>> $edad = $nacimiento->diff(new DateTime('now'))->format('%y')
+=> "27"
+>>> 
+
