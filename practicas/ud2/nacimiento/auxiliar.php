@@ -94,3 +94,30 @@
             <p>Error: <?=$err ?></p>
         <?php endforeach;
     }
+
+    function dibujar_formulario($par, $error)
+    {
+        extract($par) ?>
+        <form action="" method="GET">
+        <div>
+            <label>Nombre:
+                <input type="text" name="nombre" size="10" value="<?= $nombre ?>"/>
+            </label>
+        </div>
+        <div>
+            <label>Apellidos:
+                <input type="text" name="ape" size="10" value="<?= $ape ?>"/>
+            </label>
+        </div>
+        <div>
+            <label>Fecha de nacimiento:
+                <input type="date" name="fechaNac" size="10" value="<?= $fechaNac ?>"/>
+                <!-- <input type="text" name="fechaNac" size="10" value="<?= $fechaNac ?>" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"/> -->
+            </label>
+        </div>
+        <div>
+            <button type="submit">Enviar</button>
+        </div>
+    </form>
+    <?php
+    }
