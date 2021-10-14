@@ -34,6 +34,7 @@
      * @return string|null      La cadena trimeada
      */
     function filtrar_fecha(string $fecha, &$errores): ?string
+    /* TODO: Cambiar el nombre del parámetro $fecha por $par. Mantener ortogonalidad */
     {
        $valor = null;
        if(isset($_GET[$fecha])){
@@ -42,6 +43,14 @@
                 $errores[] = "El campo '$fecha' no puede estar vacío.";
             } else {
                 $valores = explode('-', $valor);
+                /* TODO: Contorlar la cantidad de valores que llegan:
+                if(count($fecha) == 3){
+                    [$a, $m, $d] = $fecha; // Hola asignación múltiple, pero solo con arrays(?)
+                }
+                if(!isset($a, $m, $d) || !checkdate($m, $d, $a)) {
+                    $error[] = "el parámetro $fecha contiene una fecha incorrecta";
+                }
+                */
                 if (!checkdate($valores[1], $valores[2], $valores[0])) {
                     $errores[] = "La fecha '$valor' no es correcta.";
                 }
@@ -60,8 +69,12 @@
      * @param  mixed $errores       El registro de errores.
      * @return string               La edad resultante.
      */
-    function calcular_edad(string $fecha_nac, &$errores): string
+    function calcular_edad(string $fecha_nac, &$errores): string // &$errores no se usa.
     {
+
+        /* TODO: Revisar esta opción más práctica:
+        return (new DateTime())->diff(newDatetime($fecha_nac))->y; */
+
         $nacimiento = new DateTime($fecha_nac);
         $edad = $nacimiento->diff(new DateTime())->format('%y');
         return $edad;
