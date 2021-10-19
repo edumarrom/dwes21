@@ -26,7 +26,7 @@ function comprobar_parametros(array $par, &$error): array
     return $res;
 }
 
-function comprobar_valores($par, &$error)
+function comprobar_valores(array $par, &$error): void
 {
     extract($par);
 
@@ -45,7 +45,7 @@ function comprobar_valores($par, &$error)
     }
 }
 
-function comprobar_fecha($fecha)
+function comprobar_fecha(string $fecha): bool
 {
     $correcto = false;
     $valores = explode('-', $fecha);
@@ -67,21 +67,21 @@ function calcular_edad(string $fecha_nac): string
     return $edad;
 }
 
-function mostrar_valores(array $par): void
+function mostrar_valores(array &$par): void
 {
     foreach ($par as $valor) :?>
         <p><?= $valor ?></p>
     <?php endforeach;
 }
 
-function mostrar_errores(&$errores): void
+function mostrar_errores(array &$errores): void
 {
     foreach ($errores as $err) :?>
         <p>Error: <?= $err ?></p>
     <?php endforeach;
 }
 
-function dibujar_formulario($par)
+function dibujar_formulario(array $par): void
 {
     extract($par);
     ?>
@@ -110,7 +110,7 @@ function dibujar_formulario($par)
     <?php
 }
 
-function primera_vez()
+function primera_vez(): bool
 {
     return empty($_GET);
 }
