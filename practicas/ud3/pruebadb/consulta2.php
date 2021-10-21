@@ -10,30 +10,34 @@
     <?php
     require 'auxiliar.php';
 
-    $pdo = conectar();
-
     $nombre = (isset($_GET['nombre'])) ? $nombre = trim($_GET['nombre']) : null;
     $denom = (isset($_GET['denom'])) ? $denom = trim($_GET['denom']) : null;
 
+    $pdo = conectar();
+
+    $query = "FROM emple e
+         LEFT JOIN depart d
+                ON e.depart_id = d.id
+             WHERE preparar(nombre) LIKE preparar(:nombre)
+               AND preparar(denom) LIKE preparar(:denom)";
+
+
     /* Join Empleados & Departamento */
-    $sent= $pdo->query("SELECT COUNT(*)
-                            FROM emple e
-                       LEFT JOIN depart d
-                              ON e.depart_id = d.id
-                           WHERE translate(lower(nombre), 'áéíóú', 'aeiou')
-                            LIKE translate(lower('%$nombre%'), 'áéíóú', 'aeiou')
-                             AND translate(lower(denom), 'áéíóú', 'aeiou')
-                            LIKE translate(lower('%$denom%'), 'áéíóú', 'aeiou')");
-                            //ILIKE es una extensión de Postgre
+
+    $sent = $pdo->prepare("SELECT COUNT(*) $query");
+    $sent->execute([
+        ':nombre' => "%$nombre%",
+        ':denom' => "%$denom%",
+    ]);
+
     $count = $sent->fetchColumn();
-    $sent = $pdo->query("SELECT *
-                            FROM emple e
-                       LEFT JOIN depart d
-                              ON e.depart_id = d.id
-                           WHERE translate(lower(nombre), 'áéíóú', 'aeiou')
-                           LIKE translate(lower('%$nombre%'), 'áéíóú', 'aeiou')
-                             AND translate(lower(denom), 'áéíóú', 'aeiou')
-                            LIKE translate(lower('%$denom%'), 'áéíóú', 'aeiou')");
+
+    $sent = $pdo->prepare("SELECT * $query");
+    $sent->execute([
+        ':nombre' => "%$nombre%",
+        ':denom' => "%$denom%",
+    ]);
+
     ?>
     <h2>Join Empleados y Departamentos</h2>
     <form action="" method="GET">
