@@ -7,3 +7,9 @@ function conectar()
         'prueba'
     );
 }
+
+/* TODO(?)
+function contar_filas()
+{
+
+} */
