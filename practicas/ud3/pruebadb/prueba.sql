@@ -6,15 +6,6 @@ create table depart (
     localidad varchar(255)
 );
 
-insert into
-    depart (denom, localidad)
-values
-    ('Contabilidad', 'Sanlucar'),
-    ('Informática', 'Jerez'),
-    ('Inglés', 'Londres'),
-    ('Matemáticas', 'Trebujena'),
-    ('Cibernética', 'Chipiona');
-
 drop table if exists emple cascade;
 
 create table emple (
@@ -24,6 +15,22 @@ create table emple (
     salario numeric(6, 2),
     depart_id bigint not null references depart(id)
 );
+
+create function preparar(cadena text) returns text
+language plpgsql as $$
+begin
+    return translate(lower(cadena), 'áéíóú', 'aeiou');
+end;$$;
+
+insert into
+    depart (denom, localidad)
+values
+    ('Contabilidad', 'Sanlucar'),
+    ('Informática', 'Jerez'),
+    ('Inglés', 'Londres'),
+    ('Matemáticas', 'Trebujena'),
+    ('Cibernética', 'Chipiona');
+
 
 insert into
     emple (nombre, fecha_alt, salario, depart_id)

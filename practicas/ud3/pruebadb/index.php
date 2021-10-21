@@ -10,8 +10,10 @@
     <?php
     require 'auxiliar.php';
 
-    /* Departamentos */
+    /* Conexión a base de datos */
     $pdo = conectar();
+
+    /* Departamentos */
     $depart= $pdo->query('SELECT COUNT(*) FROM depart');
     $depart_count = $depart->fetchColumn(); // Devuelve la primera columna.
     $depart = $pdo->query('SELECT * FROM depart'); // PSOStatement implements Traversable.
@@ -77,7 +79,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td>Número de filas:</td>
+                <td>Número de filas</td>
                 <td><?=$emple_count?></td>
             </tr>
         </tfoot>
