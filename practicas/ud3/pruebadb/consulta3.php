@@ -10,22 +10,20 @@
     <?php
     require 'auxiliar.php';
 
-    $pdo = conectar();
-
-    if (count($_POST) == 1 && isset($_POST['id'])) {
+    /* if (count($_POST) == 1 && isset($_POST['id'])) {
         $id = trim($_POST['id']);
 
         // TODO: Arreglar esta movida de comprobar POST para borrado de tupla
         if (ctype_digit($id)) {
-            $sent = pdo->prepare('DELETE FROM emple WHERE id = :id');
-            if($sent->execute([':id' = $id])
+            $sent = $pdo->prepare('DELETE FROM emple WHERE id = :id');
+            if ($sent->execute([':id' => $id])
             && $sent->rowCount() === 1) { ?>
                 <h3>Se ha borrado correctamente el empleado</h3><?php
             } else { ?>
                 <h3>Ha ocurrido un error al borrar el emple</h3><?php
             }
         }
-    }
+    } */
 
     $nombre = (isset($_GET['nombre'])) ? $nombre = trim($_GET['nombre']) : null;
     $denom = (isset($_GET['denom'])) ? $denom = trim($_GET['denom']) : null;
@@ -63,6 +61,7 @@
 
     /* Join Empleados & Departamento */
 
+    $pdo = conectar();
     $sent = $pdo->prepare("SELECT COUNT(*) $query");
     $sent->execute($execute);
 
