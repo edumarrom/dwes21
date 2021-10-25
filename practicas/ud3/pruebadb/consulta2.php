@@ -12,32 +12,47 @@
 
     $nombre = (isset($_GET['nombre'])) ? $nombre = trim($_GET['nombre']) : null;
     $denom = (isset($_GET['denom'])) ? $denom = trim($_GET['denom']) : null;
+    $salario = (isset($_GET['salario'])) ? trim($_GET['salario']) : null;
 
     $pdo = conectar();
 
     $query = "FROM emple e
          LEFT JOIN depart d
-                ON e.depart_id = d.id
-             WHERE preparar(nombre) LIKE preparar(:nombre)
-               AND preparar(denom) LIKE preparar(:denom)";
+                ON e.depart_id = d.id";
 
+    $where = [];
+    $execute = [];
+
+    if(isset($nombre) && $nombre !== '') {
+        $where[] = 'preparar(nombre) LIKE preparar(:nombre)';
+        $execute[':nombre'] = "%$nombre%";
+    }
+
+    if(isset($denom) && $nombre !== '') {
+        $where[] = 'preparar(denom) LIKE preparar(:denom)';
+        $execute[':denom'] = "%$denom%";
+    }
+
+    if(isset($salario) && $nombre !== '') {
+        if (is_numeric($salario)) {
+            $where[] = 'salario = :salario';
+            $execute[':salario'] = $salario;
+        }
+    }
+
+    if(!empty($where)) {
+        $query .= ' WHERE ' . implode(' AND ', $where);
+    };
 
     /* Join Empleados & Departamento */
 
     $sent = $pdo->prepare("SELECT COUNT(*) $query");
-    $sent->execute([
-        ':nombre' => "%$nombre%",
-        ':denom' => "%$denom%",
-    ]);
+    $sent->execute($execute);
 
     $count = $sent->fetchColumn();
 
     $sent = $pdo->prepare("SELECT * $query");
-    $sent->execute([
-        ':nombre' => "%$nombre%",
-        ':denom' => "%$denom%",
-    ]);
-
+    $sent->execute($execute);
     ?>
     <h2>Join Empleados y Departamentos</h2>
     <form action="" method="GET">
@@ -47,6 +62,9 @@
             </label>
             <label>Departamento:
                 <input type="text" name="denom" size="10" value="<?= $denom ?>"/>
+            </label>
+            <label>Salario:
+                <input type="text" name="salario" size="10" value="<?= $salario ?>"/>
             </label>
         </div>
         <div>
