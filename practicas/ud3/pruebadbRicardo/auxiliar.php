@@ -8,9 +8,9 @@ function conectar()
     );
 }
 
-function filtrar_trim($nombre)
+function filtrar_trim($nombre, $metodo = INPUT_POST)
 {
-    return filter_input(INPUT_POST, $nombre, FILTER_CALLBACK,
+    return filter_input($metodo, $nombre, FILTER_CALLBACK,
                         ['options' => 'trim']);
 }
 

@@ -94,6 +94,11 @@
                         <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
                         <button type="submit">Borrar</button>
                     </form>
+
+                    <form action="modificar.php" method="get">
+                        <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
+                        <button type="submit">Modificar</button>
+                    </form>
                 </td>
             </tr>
             <?php endforeach ?>
