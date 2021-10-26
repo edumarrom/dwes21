@@ -17,6 +17,14 @@
 
     $error = [];
 
+    if(isset($nombre)) {
+        if ($nombre === '') {
+            $error['nombre'] = 'El nombre es obligatorio.';
+        }
+    }
+
+    // TODO: Validar $fecha_alt
+
     if (isset($salario)) {
         if(!is_numeric($salario)) {
             $error['salario'] = 'El salario deber ser un número.';
@@ -39,8 +47,6 @@
         }
     }
 
-    var_dump($nombre, $fecha_alt, $salario, $depart_id);
-
     if (isset($nombre, $fecha_alt, $salario, $depart_id)
         && empty($error)) {
         $sent = $pdo->prepare(
@@ -58,32 +64,14 @@
         header('Location: index.php');
         return;
     }
+
+    mostrar_formulario(
+        compact(
+            'nombre',
+            'fecha_alt',
+            'salario',
+            'depart_id'
+        ), $error);
     ?>
-
-    <div>
-        <form action="" method="POST">
-            <div>
-                <label for="nombre">Nombre:</label>
-                <input id="nombre" type="text" name="nombre" value="<?= $nombre ?>"/>
-            </div>
-
-            <div>
-                <label for="fecha_alt">Fecha de alta:</label>
-                <input id="fecha_alt" type="text" name="fecha_alt" value="<?= $fecha_alt ?>"/>
-            </div>
-
-            <div>
-                <label for="salario">Salario:</label>
-                <input id="salario" type="text" name="salario" value="<?= $salario ?>"/>
-            </div>
-
-            <div>
-                <label for="depart_id">ID Departamento:</label>
-                <input id="depart_id" type="text" name="depart_id" value="<?= $depart_id ?>"/>
-            </div>
-
-            <button type="submit">Insertar</button>
-        </form>
-    </div>
 </body>
 </html>
