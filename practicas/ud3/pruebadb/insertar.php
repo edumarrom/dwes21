@@ -15,8 +15,7 @@
     $salario = (isset($_GET['salario'])) ? trim($_GET['salario']) : null;
     $depart_id = (isset($_GET['depart_id'])) ? $depart_id = trim($_GET['depart_id']) : null;
 
-    $query = "INSERT INTO
-                    emple (nombre, fecha_alt, salario, depart_id)";
+    $query = "INSERT INTO emple (nombre, fecha_alt, salario, depart_id)";
 
     $values = [];
     $execute = [];
@@ -46,10 +45,10 @@
     }
 
     if(!empty($values)) {
-        $query .= ' VALUES (' . implode(', ', $values) . ')';
+        $query .= ' VALUES (' . implode(', ', $values) . ');';
     }
 
-    if (true) {
+    if (false) {
         $pdo = conectar();
         $sent = $pdo->prepare("$query");
         $sent->execute($execute);
@@ -82,7 +81,8 @@
             </tr>
         </tbody>
     </table>
-    <form action="crear.php" method="post">
+
+    <form action="insertar.php" method="post">
         <button type="submit">Sí</button>
         <button><a href="index.php">No</a></button>
     </form>

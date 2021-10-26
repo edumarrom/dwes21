@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-    require 'conectar.php';
+    require 'auxiliar.php';
 
     $nombre = (isset($_GET['nombre'])) ? $nombre = trim($_GET['nombre']) : null;
     $denom = (isset($_GET['denom'])) ? $denom = trim($_GET['denom']) : null;
@@ -105,21 +105,8 @@
             </tr>
         </tfoot>
     </table>
-    <form action="insertar.php" method="get">
-        <label>Nombre:
-                <input type="text" name="nombre" size="10" value="Paco"/>
-        </label>
-        <label>Fecha de alta:
-                <input type="text" name="fecha_alt" size="10" value="2019-12-04 17:00:00"/>
-        </label>
-        <label>Salario:
-                <input type="text" name="salario" size="10" value="2990.75"/>
-        </label>
-        <label>ID Departamento:
-                <input type="text" name="depart_id" size="10" value="1"/>
-        </label>
-
-        <button type="submit">Insertar empleado</button>
-    </form>
+    <div>
+        <button><a href="insertar.php">Crear nuevo empleado</a></button>
+    </div>
 </body>
 </html>
