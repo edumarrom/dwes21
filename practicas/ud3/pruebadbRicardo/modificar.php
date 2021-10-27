@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,10 @@
     <?php
     require 'auxiliar.php';
 
+    /* if(isset($_SESSION['saludo'])) {
+        var_dump($_SESSION['saludo']);
+    } */
+
     $id = filtrar_trim('id', INPUT_GET);
     $error = [];
 
@@ -17,7 +22,7 @@
 
     if (isset($id)) {
         if (!ctype_digit($id)) {
-            // Error loco
+            // $_SESSION['mensaje_error'] = 'El ID no es correcto'.
             header('Location: index.php');
             return;
         }

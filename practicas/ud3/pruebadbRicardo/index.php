@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,9 +10,29 @@
 <body>
     <?php require 'auxiliar.php' ?>
 
-    <form action="expirar_cookie.php">
+    <!-- TODO: Terminar esta vaina -->
+    <?php if (isset($_SESSION['mensaje_error'])) : ?>
+        <h2><?= $_SESSION['mensaje_error'] ?> </h2>
+    <?php  endif ?>
+
+    <?php
+    // TODO: Quien crea el carrito, debe ser cualquier sitio donde sea necesario.
+    if(!isset($_SESSION['carrito'])) {
+        $_SESSION['carrito'] = [];
+    }
+
+    // TODO: Esto está petando. Hay que repararlo.
+    if(isset($_SESSION['carrito'])) : ?>
+        <?php print_r($_SESSION['carrito']); ?>
+        <form action="vaciar.php">
+            <button> type="submit">Vaciar carrito</button>
+        </form>
+    <?php endif ?>
+
+    <!-- <form action="expirar_cookie.php">
     <button>Expirar cookie</button>
-    </form>
+    </form> -->
+
     <?php if (comprobar_cookie()): ?>
         <div style="background-color: black; color: white; padding: 1em; margin: 5px 5px;">
             <form action="aceptar_cookie.php">
@@ -111,6 +132,11 @@
                     <form action="modificar.php" method="get">
                         <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
                         <button type="submit">Modificar</button>
+                    </form>
+
+                    <form action="agregar.php" method="get">
+                        <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
+                        <button type="submit">Añadir al carrito</button>
                     </form>
                 </td>
             </tr>
