@@ -7,8 +7,21 @@
     <title>Index</title>
 </head>
 <body>
+    <?php require 'auxiliar.php' ?>
+
+    <form action="expirar_cookie.php">
+    <button>Expirar cookie</button>
+    </form>
+    <?php if (comprobar_cookie()): ?>
+        <div style="background-color: black; color: white; padding: 1em; margin: 5px 5px;">
+            <form action="aceptar_cookie.php">
+                Este sitio usa cookies.
+                <button>Aceptar</button>
+            </form>
+        </div>
+    <?php endif ?>
+
     <?php
-    require 'auxiliar.php';
 
     $nombre = (isset($_GET['nombre'])) ? $nombre = trim($_GET['nombre']) : null;
     $denom = (isset($_GET['denom'])) ? $denom = trim($_GET['denom']) : null;

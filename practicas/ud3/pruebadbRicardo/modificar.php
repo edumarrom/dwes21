@@ -32,17 +32,72 @@
             header('Location: index.php');
             return;
         }
+    } else {
+        // Error
+        header('Location: index.php');
+        return;
     }
 
-    // TODO: Los valores tienen que aparecer en el formulario
-    if(!isset($nombre, $fecha_alt, $salario, $depart_id)) {
-        extract($fila);
-    }
+
+
 
     $nombre = filtrar_trim('nombre');
     $fecha_alt = filtrar_trim('fecha_alt');
     $salario = filtrar_trim('salario');
     $depart_id = filtrar_trim('depart_id');
+
+    if(!isset($nombre, $fecha_alt, $salario, $depart_id)) {
+        extract($fila);
+    }
+
+    if(isset($nombre)) {
+        if ($nombre === '') {
+            $error['nombre'] = 'El nombre es obligatorio.';
+        }
+    }
+
+    // TODO: Validar $fecha_alt
+
+    if (isset($salario)) {
+        if(!is_numeric($salario)) {
+            $error['salario'] = 'El salario deber ser un número.';
+        }
+    }
+
+    $pdo = conectar();
+
+    if (isset($depart_id)) {
+        if (!ctype_digit($depart_id)) {
+            $error['depart_id'] = 'El departamento no existe.';
+        } else {
+            $sent = $pdo->prepare('SELECT COUNT(*)
+                                 FROM depart
+                                WHERE id = ?'); // marcador posicional/nominal
+            $sent->execute([$depart_id]);
+            if ($sent->fetchColumn() === 0) {
+                $error['depart_id'] = 'El departamento no existe.';
+            }
+        }
+    }
+
+    if (isset($nombre, $fecha_alt,  $salario, $depart_id)
+        && empty($error)) {
+        $sent = $pdo->prepare('UPDATE emple
+                                  SET nombre = :nombre
+                                    , fecha_alt = :fecha_alt
+                                    , salario = :salario
+                                    , depart_id = :depart_id
+                                WHERE id = :id');
+        $sent->execute([
+            ':nombre' => $nombre,
+            ':fecha_alt' => $fecha_alt,
+            ':salario' => $salario,
+            ':depart_id' => $depart_id,
+            ':id' => $id
+        ]);
+        header('Location: index.php');
+        return;
+    }
 
     mostrar_formulario(
         compact(

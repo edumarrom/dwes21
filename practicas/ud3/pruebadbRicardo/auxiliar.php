@@ -48,7 +48,8 @@ function mostrar_formulario(array $params, &$error)
                 <input id="depart_id" type="text" name="depart_id" value="<?= $depart_id ?>"/>
             </div>
 
-            <button type="submit">Insertar</button>
+            <!-- TODO: Que el texto del botón cambie si insertamos o modificamos -->
+            <button type="submit">Confirmar</button>
             <button><a href="index.php">Volver</a></button>
         </form>
     </div><?php
@@ -59,3 +60,8 @@ function contar_filas()
 {
 
 } */
+
+function comprobar_cookie()
+{
+    return !isset($_COOKIE['aceptar_banner']);
+}
