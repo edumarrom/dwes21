@@ -88,3 +88,8 @@ function cabecera()
             <?php endif ?>
         </div>
 <?php }
+
+function hh($cadena)
+{
+    return htmlspecialchars($cadena, ENT_QUOTES | ENT_SUBSTITUTE);
+}
