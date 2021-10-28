@@ -20,6 +20,11 @@
             if ($sent->execute([':id' => $id])
             && $sent->rowCount() === 1) {
                 // Bien
+                foreach ($_SESSION['carrito'] as &$item) {
+                    if ($item['id'] == $id) {
+                        unset($_SESSION['carrito'][$item['id']]);
+                    }
+                }
             } else {
                 // mal
             }

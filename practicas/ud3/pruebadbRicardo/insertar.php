@@ -25,6 +25,15 @@
     }
 
     // TODO: Validar $fecha_alt
+    $valores = explode('-', $fecha_alt);
+    if(count($valores) == 3) {
+        [$a, $m, $d] = $valores; // Hola asignación múltiple, pero solo con arrays(?)
+        if(!checkdate($m, $d, $a)) {
+            $error['fecha_alt'] = 'La fecha no es válida.';
+    } else {
+        $error['fecha_alt'] = 'La fecha es obligatorio.';
+        }
+    }
 
     if (isset($salario)) {
         if(!is_numeric($salario)) {

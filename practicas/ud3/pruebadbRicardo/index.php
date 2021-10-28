@@ -10,10 +10,10 @@
 <body>
     <?php require 'auxiliar.php' ?>
 
-    <!-- TODO: Terminar esta vaina -->
-    <?php if (isset($_SESSION['mensaje_error'])) : ?>
-        <h2><?= $_SESSION['mensaje_error'] ?> </h2>
-    <?php  endif ?>
+    <?php if (isset($_SESSION['mensaje_error'])): ?>
+        <h2><?= $_SESSION['mensaje_error'] ?></h2>
+        <?php unset($_SESSION['mensaje_error']) ?>
+    <?php endif ?>
 
     <?php
     // TODO: Quien crea el carrito, debe ser cualquier sitio donde sea necesario.
@@ -21,26 +21,16 @@
         $_SESSION['carrito'] = [];
     }
 
-    // TODO: Esto está petando. Hay que repararlo.
     if(isset($_SESSION['carrito'])) : ?>
         <?php print_r($_SESSION['carrito']); ?>
         <form action="vaciar.php">
-            <button> type="submit">Vaciar carrito</button>
+            <button>Vaciar carrito</button>
         </form>
     <?php endif ?>
 
     <!-- <form action="expirar_cookie.php">
     <button>Expirar cookie</button>
     </form> -->
-
-    <?php if (comprobar_cookie()): ?>
-        <div style="background-color: black; color: white; padding: 1em; margin: 5px 5px;">
-            <form action="aceptar_cookie.php">
-                Este sitio usa cookies.
-                <button>Aceptar</button>
-            </form>
-        </div>
-    <?php endif ?>
 
     <?php
 
@@ -77,7 +67,6 @@
     };
 
     /* Join Empleados & Departamento */
-
     $pdo = conectar();
     $sent = $pdo->prepare("SELECT COUNT(*) $query");
     $sent->execute($execute);
@@ -152,5 +141,14 @@
     <div>
         <button><a href="insertar.php">Crear nuevo empleado</a></button>
     </div>
+
+    <?php if (comprobar_cookie()): ?>
+        <div style="background-color: black; color: white; padding: 1em; margin: 5px 5px;">
+            <form action="aceptar_cookie.php">
+                Este sitio usa cookies.
+                <button>Aceptar</button>
+            </form>
+        </div>
+    <?php endif ?>
 </body>
 </html>

@@ -14,7 +14,6 @@ function filtrar_trim($nombre, $metodo = INPUT_POST)
                         ['options' => 'trim']);
 }
 
-// TODO: Terminar function mostrar_error
 function mostrar_error(&$error, $par)
 {
     if (isset($error[$par])) { ?>
@@ -22,7 +21,7 @@ function mostrar_error(&$error, $par)
     }
 }
 
-function mostrar_formulario(array $params, &$error)
+function mostrar_formulario(array $params, &$error, $update = false)
 {
     extract($params);
     ?>
@@ -49,7 +48,10 @@ function mostrar_formulario(array $params, &$error)
             </div>
 
             <!-- TODO: Que el texto del botón cambie si insertamos o modificamos -->
-            <button type="submit">Confirmar</button>
+            <button type="submit">
+
+                <?= ($update) ? 'Modificar' : 'Insertar' ?>
+            </button>
             <button><a href="index.php">Volver</a></button>
         </form>
     </div><?php
