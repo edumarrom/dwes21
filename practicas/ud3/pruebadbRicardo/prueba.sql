@@ -38,3 +38,16 @@ insert into
 values
     ('Manolo', '2019-12-04 17:00:00', 2340.75, 2),
     ('Rosa', '2020-04-05 14:00:00', 2874.99, 4);
+
+drop table if exists usuarios cascade;
+
+create table usuarios (
+    id bigserial primary key,
+    username varchar(255) not null unique,
+    password varchar(255) not null
+);
+
+insert into
+    usuarios (username, password)
+values
+    ('admin', crypt('admin', gen_salt('bf', 10)));

@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+
+
 $id = filter_input(INPUT_GET, 'id');
 
 // TODO: Si borro un cliente, su info del carrito debe tambien desaparecer

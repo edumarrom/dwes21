@@ -39,9 +39,10 @@
         header('Location: index.php');
         return;
     }
-
-
     ?>
+
+    <?php cabecera() ?>
+
     <h3>Seguro que quiere borrar el empleado?</h3>
     <form action="borrar.php" method="post">
         <input type="hidden" name="id" value="<?= $_GET['id']?>">

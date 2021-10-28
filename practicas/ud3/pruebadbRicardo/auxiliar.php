@@ -67,3 +67,24 @@ function comprobar_cookie()
 {
     return !isset($_COOKIE['aceptar_banner']);
 }
+
+function logueado()
+{
+    return $_SESSION['login'] ?? false;
+}
+
+function cabecera()
+{ ?>
+    <div>
+            <?php if ($login = logueado()) : ?>
+                <?= $login['username'] ?>
+                <form action="logout.php" method="POST" style="margin-left: 0;">
+                    <button type="submit">Logout</button>
+                </form>
+            <?php else: ?>
+                <form action="login.php" method="get">
+                    <button type="submit">Login</button>
+                </form>
+            <?php endif ?>
+        </div>
+<?php }
