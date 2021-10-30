@@ -28,16 +28,14 @@
             } else {
                 // mal
             }
-            header('Location: index.php');
-            return;
+            tp('index.php');
         }
     } elseif (isset($_GET['id'])) {
         // Se ha recibido un GET en lugar de un POST
         $id = trim($_GET['id']);
     } else {
         // Error: Intento de acceder a este fichero directamente
-        header('Location: index.php');
-        return;
+        tp('index.php');
     }
     ?>
 

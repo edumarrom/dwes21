@@ -16,7 +16,7 @@ create table emple (
     depart_id bigint not null references depart(id)
 );
 
-drop function if exists preparar(text)  cascade;
+drop function if exists preparar(text) cascade;
 create function preparar(cadena text) returns text
 language plpgsql as $$
 begin

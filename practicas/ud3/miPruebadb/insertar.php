@@ -25,13 +25,15 @@
     }
 
     // TODO: Validar $fecha_alt
-    $valores = explode('-', $fecha_alt);
-    if(count($valores) == 3) {
-        [$a, $m, $d] = $valores; // Hola asignación múltiple, pero solo con arrays(?)
-        if(!checkdate($m, $d, $a)) {
-            $error['fecha_alt'] = 'La fecha no es válida.';
-    } else {
-        $error['fecha_alt'] = 'La fecha es obligatorio.';
+    if (isset($fecha_alt)) {
+        $valores = explode('-', $fecha_alt);
+        if(count($valores) == 3) {
+            [$a, $m, $d] = $valores; // Hola asignación múltiple, pero solo con arrays(?)
+            if(!checkdate($m, $d, $a)) {
+                $error['fecha_alt'] = 'La fecha no es válida.';
+            }
+        } else {
+            $error['fecha_alt'] = 'La fecha es obligatoria.';
         }
     }
 
@@ -48,8 +50,8 @@
             $error['depart_id'] = 'El departamento no existe.';
         } else {
             $sent = $pdo->prepare('SELECT COUNT(*)
-                                 FROM depart
-                                WHERE id = ?'); // marcador posicional/nominal
+                                     FROM depart
+                                    WHERE id = ?'); // marcador posicional/nominal
             $sent->execute([$depart_id]);
             if ($sent->fetchColumn() === 0) {
                 $error['depart_id'] = 'El departamento no existe.';
@@ -71,8 +73,7 @@
         ]) || $sent->rowCount() !== 1) {
             // Ha habido un error.
         }
-        header('Location: index.php');
-        return;
+        tp('index.php');
     }
 
     cabecera();

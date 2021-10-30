@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-    require 'conectar.php';
+    require 'auxiliar.php';
 
     if (isset($_POST['id'])) {
         $id = trim($_POST['id']);
@@ -22,15 +22,15 @@
             } else {
                 // mal
             }
-            header('Location: index.php');
+            header('Location: consulta3.php');
             return;
         }
     } elseif (isset($_GET['id'])) {
         // Se ha recibido un GET en lugar de un POST
         $id = trim($_GET['id']);
     } else {
-        // Error: Intento de acceder a este fichero directamente
-        header('Location: index.php');
+        // Error: Intento de acceder a este php directamente
+        header('Location: consulta3.php');
         return;
     }
 
@@ -40,7 +40,7 @@
     <form action="borrar.php" method="post">
         <input type="hidden" name="id" value="<?= $_GET['id']?>">
         <button type="submit">Sí</button>
-        <button><a href="index.php">No</a></button>
+        <button><a href="consulta3.php">No</a></button>
     </form>
 </body>
 </html>

@@ -23,8 +23,7 @@
     if (isset($id)) {
         if (!ctype_digit($id)) {
             $_SESSION['mensaje_error'] = 'El ID no es correcto'.
-            header('Location: index.php');
-            return;
+            tp('index.php');
         }
         $sent = $pdo->prepare('SELECT *
                                  FROM emple
@@ -34,13 +33,11 @@
 
         if ($fila === false) {
             // Error
-            header('Location: index.php');
-            return;
+            tp('index.php');
         }
     } else {
         // Error
-        header('Location: index.php');
-        return;
+        tp('index.php');
     }
 
 
@@ -75,9 +72,9 @@
         if (!ctype_digit($depart_id)) {
             $error['depart_id'] = 'El departamento no existe.';
         } else {
-            $sent = $pdo->prepare('SELECT COUNT(*)
-                                 FROM depart
-                                WHERE id = ?'); // marcador posicional/nominal
+            $sent = $pdo->prepare("SELECT COUNT(*)
+                                     FROM depart
+                                    WHERE id = ?"); // marcador posicional/nominal
             $sent->execute([$depart_id]);
             if ($sent->fetchColumn() === 0) {
                 $error['depart_id'] = 'El departamento no existe.';
@@ -100,8 +97,7 @@
             ':depart_id' => $depart_id,
             ':id' => $id
         ]);
-        header('Location: index.php');
-        return;
+        tp('index.php');
     }
 
     cabecera();
@@ -112,7 +108,9 @@
             'fecha_alt',
             'salario',
             'depart_id',
-        ), $error);
+        ), $error,
+        true
+    );
     ?>
 </body>
 </html>

@@ -11,32 +11,31 @@
     <?php
     require 'auxiliar.php';
 
-
     $username = filtrar_trim('username');
     $password = filtrar_trim('password');
 
-    $pdo= conectar();
+    $error = [];
 
-    $sent = $pdo->prepare('SELECT *
-                             FROM usuarios
-                            WHERE username = :username');
+    if (isset($username, $password)) {
+        $pdo= conectar();
 
-    $sent->execute([':username => $username']);
-    $fila = $sent->fetch();
+        $sent = $pdo->prepare('SELECT *
+                                FROM usuarios
+                                WHERE username = :username');
+        $sent->execute([':username' => $username]);
+        $fila = $sent->fetch();
 
-    if ($fila !== false && password_verify($fila, $fila['password'])) {
-        // Correcto
-        $_SESSION['login'] = [
-            'id' => $fila['id'],
-            'username' => $fila['username']
-        ];
-        header('Location: index.html');
-        return;
-    } else {
-        $error[] = 'Usuario o contraseña incorrectos.';
+        if ($fila !== false && password_verify($fila['username'], $fila['password'])) {
+            // Correcto
+            $_SESSION['login'] = [
+                'id' => $fila['id'],
+                'username' => $fila['username']
+            ];
+            tp('index.php');
+        } else {
+            $error[] = 'Usuario o contraseña incorrectos.';
+        }
     }
-
-
     ?>
 
     <?php cabecera(); ?>
@@ -48,10 +47,10 @@
 
     <div>
         <form action="" method="post">
-            <label for="uesrname"></label>
+            <label for="username">Usuario:</label>
             <input type="text" name="username" id="username"
                     value="<?= $username ?>">
-            <label for="password"></label>
+            <label for="password">Contraseña:</label>
             <input type="password" name="password" id="password">
             <button type="submit">Login</button>
         </form>
