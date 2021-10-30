@@ -9,7 +9,7 @@
 </head>
 <body>
     <?php
-    require 'auxiliar.php';
+    require '../auxiliar.php';
 
     $username = filtrar_trim('username');
     $password = filtrar_trim('password');
@@ -31,7 +31,7 @@
                 'id' => $fila['id'],
                 'username' => $fila['username']
             ];
-            tp('index.php');
+            tp('/index.php');
         } else {
             $error[] = 'Usuario o contraseña incorrectos.';
         }
@@ -52,7 +52,8 @@
                     value="<?= $username ?>">
             <label for="password">Contraseña:</label>
             <input type="password" name="password" id="password">
-            <button type="submit">Login</button>
+            <button style="margin: .2em .2em; padding: .3em 1.5em;" type="submit">Login</button>
+            <button style="margin: .2em .2em; padding: .3em 1.5em;"><a href="/index.php">Volver</a></button>
         </form>
     </div>
 </body>

@@ -25,14 +25,14 @@
 
     if(isset($_SESSION['carrito'])) : ?>
         <?php print_r($_SESSION['carrito']); ?>
-        <form action="vaciar.php">
-            <button>Vaciar carrito</button>
+        <form action="carrito/vaciar.php">
+            <button style="margin: .2em .2em; padding: .3em 1.5em;">Vaciar carrito</button>
         </form>
     <?php endif ?>
 
-    <!-- <form action="expirar_cookie.php">
-    <button>Expirar cookie</button>
-    </form> -->
+    <form action="expirar_cookie.php">
+    <button style="margin: .2em .2em; padding: .3em 1.5em;" >Expirar cookie</button>
+    </form>
 
     <?php
 
@@ -79,7 +79,7 @@
     $sent->execute($execute);
     ?>
 
-    <h2>Join Empleados y Departamentos</h2>
+    <h2>Empleados</h2>
     <form action="" method="GET">
         <div>
             <label>Nombre:
@@ -93,7 +93,7 @@
             </label>
         </div>
         <div>
-            <button type="submit">Enviar</button>
+            <button type="submit" style="margin: .5em .5em; padding: .3em 1.5em;">Filtrar</button>
         </div>
     </form>
     <table border="1">
@@ -115,17 +115,17 @@
                 <td><?= $fila['denom'] ?></td>
                 <td><?= $fila['localidad'] ?></td>
                 <td>
-                    <form action="borrar.php" method="get">
+                    <form action="borrar/index.php" method="get">
                         <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
                         <button type="submit">Borrar</button>
                     </form>
 
-                    <form action="modificar.php" method="get">
+                    <form action="modificar/index.php" method="get">
                         <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
                         <button type="submit">Modificar</button>
                     </form>
 
-                    <form action="agregar.php" method="get">
+                    <form action="carrito/agregar.php" method="get">
                         <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
                         <button type="submit">Añadir al carrito</button>
                     </form>
@@ -141,16 +141,7 @@
         </tfoot>
     </table>
     <div>
-        <button><a href="insertar.php">Crear nuevo empleado</a></button>
+        <button style="margin: .5em .5em; padding: .3em 1.5em;"><a href="insertar/index.php">Crear nuevo empleado</a></button>
     </div>
-
-    <?php if (comprobar_cookie()): ?>
-        <div style="background-color: black; color: white; padding: 1em; margin: 5px 5px;">
-            <form action="aceptar_cookie.php">
-                Este sitio usa cookies.
-                <button>Aceptar</button>
-            </form>
-        </div>
-    <?php endif ?>
 </body>
 </html>

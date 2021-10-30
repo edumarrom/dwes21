@@ -9,7 +9,7 @@
 </head>
 <body>
     <?php
-    require 'auxiliar.php';
+    require '../auxiliar.php';
 
     $nombre = filtrar_trim('nombre');
     $fecha_alt = filtrar_trim('fecha_alt');
@@ -73,7 +73,7 @@
         ]) || $sent->rowCount() !== 1) {
             // Ha habido un error.
         }
-        tp('index.php');
+        tp('/index.php');
     }
 
     cabecera();

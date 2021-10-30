@@ -60,7 +60,7 @@ function mostrar_formulario(array $params, $error, $update = false)
                 <button type="submit">
                     <?= ($update) ? 'Modificar' : 'Insertar' ?>
                 </button>
-                <button><a href="index.php">Volver</a></button>
+                <button><a href="/index.php">Volver</a></button>
             </div>
         </form>
     </div><?php
@@ -77,22 +77,40 @@ function comprobar_cookie()
     return !isset($_COOKIE['aceptar_banner']);
 }
 
+function banner_cookie()
+{
+    if (comprobar_cookie()): ?>
+        <div style="display: flex; justify-content: right; background-color: black; color: white; padding: 1em; margin: 5px 5px;">
+        <form action="aceptar_cookie.php">
+            Este sitio usa cookies.
+            <button>Aceptar</button>
+        </form>
+    </div>
+
+    <?php endif;
+}
+
 function logueado()
 {
     return $_SESSION['login'] ?? false;
 }
 
 function cabecera()
-{ ?>
+{
+    banner_cookie(); ?>
+    <div style="display: flex; justify-content: left;">
+        <h3>Mi PruebaDB</h3>
+    </div>
     <div style="display: flex; justify-content: right;">
+
         <?php if ($login = logueado()) : ?>
             <?= $login['username'] ?>
-            <form action="logout.php" method="POST" style="margin-left: .7em;">
-                <button type="submit">Logout</button>
+            <form action="sesion/logout.php" method="POST" style="margin-left: .7em;">
+                <button style="margin: .5em .5em; padding: .3em 1.5em;" type="submit">Logout</button>
             </form>
         <?php else: ?>
-            <form action="login.php" method="get">
-                <button type="submit">Login</button>
+            <form action="sesion/login.php" method="get">
+                <button style="margin: .5em .5em; padding: .3em 1.5em;" type="submit">Login</button>
             </form>
         <?php endif ?>
     </div>
