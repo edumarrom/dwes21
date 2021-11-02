@@ -10,7 +10,7 @@
 <body>
     <?php
     /* MODIFICAR UN EMPLEADO */
-    require '../auxiliar.php';
+    require '../comunes/auxiliar.php';
 
     /* if(isset($_SESSION['saludo'])) {
         var_dump($_SESSION['saludo']);
@@ -24,7 +24,7 @@
     if (isset($id)) {
         if (!ctype_digit($id)) {
             $_SESSION['mensaje_error'] = 'El ID no es correcto'.
-            tp('/index.php');
+            tp('index.php');
         }
         $sent = $pdo->prepare('SELECT *
                                  FROM emple
@@ -34,11 +34,11 @@
 
         if ($fila === false) {
             // Error
-            tp('/index.php');
+            tp('index.php');
         }
     } else {
         // Error
-        tp('/index.php');
+        tp('index.php');
     }
 
 
@@ -98,7 +98,7 @@
             ':depart_id' => $depart_id,
             ':id' => $id
         ]);
-        tp('/index.php');
+        tp('index.php');
     }
 
     cabecera();

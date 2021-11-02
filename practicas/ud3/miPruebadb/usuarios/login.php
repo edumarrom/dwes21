@@ -9,7 +9,7 @@
 </head>
 <body>
     <?php
-    require '../auxiliar.php';
+    require '/comunes/auxiliar.php';
 
     $username = filtrar_trim('username');
     $password = filtrar_trim('password');

@@ -8,7 +8,7 @@
     <title>Index</title>
 </head>
 <body>
-    <?php require 'auxiliar.php' ?>
+    <?php require '../comunes/auxiliar.php' ?>
 
     <?php cabecera() ?>
 
@@ -115,12 +115,12 @@
                 <td><?= $fila['denom'] ?></td>
                 <td><?= $fila['localidad'] ?></td>
                 <td>
-                    <form action="borrar/index.php" method="get">
+                    <form action="borrar.php" method="get">
                         <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
                         <button type="submit">Borrar</button>
                     </form>
 
-                    <form action="modificar/index.php" method="get">
+                    <form action="modificar.php" method="get">
                         <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
                         <button type="submit">Modificar</button>
                     </form>
@@ -141,7 +141,7 @@
         </tfoot>
     </table>
     <div>
-        <button style="margin: .5em .5em; padding: .3em 1.5em;"><a href="insertar/index.php">Crear nuevo empleado</a></button>
+        <button style="margin: .5em .5em; padding: .3em 1.5em;"><a href="insertar.php">Crear nuevo empleado</a></button>
     </div>
 </body>
 </html>

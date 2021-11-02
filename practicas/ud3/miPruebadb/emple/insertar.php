@@ -15,6 +15,7 @@
     $fecha_alt = filtrar_trim('fecha_alt');
     $salario = filtrar_trim('salario');
     $depart_id = filtrar_trim('depart_id');
+    $token_csrf = filtrar_trim('token_csrf');
 
     $error = [];
 
@@ -61,6 +62,14 @@
 
     if (isset($nombre, $fecha_alt, $salario, $depart_id)
         && empty($error)) {
+
+            // Funcion en camino
+            if (!isset($_SESSION['token_csrf'])
+                || $token_csrf !== $_SESSION['token_csrf']) {
+                header('Location: index.html');
+                return;
+            }
+
         $sent = $pdo->prepare(
             'INSERT INTO emple ( nombre, fecha_alt, salario, depart_id)
                 VALUES (:nombre, :fecha_alt, :salario, :depart_id)'
@@ -78,12 +87,16 @@
 
     cabecera();
 
+    $token_csrf = bin2hex(random_bytes(32));
+    $_SESSION['token_csrf'] = $token_csrf;
+
     mostrar_formulario(
         compact(
             'nombre',
             'fecha_alt',
             'salario',
-            'depart_id'
+            'depart_id',
+            'token_csrf'
         ), $error);
     ?>
 </body>
