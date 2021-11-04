@@ -5,7 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Empleados</title>
+    <style>
+        table,
+        td {
+            border: 1px solid black;
+        }
+
+        button {
+            margin: .2em .2em;
+            padding: .3em 1.5em;
+        }
+    </style>
 </head>
 <body>
     <?php require '../comunes/auxiliar.php' ?>
@@ -25,13 +36,13 @@
 
     if(isset($_SESSION['carrito'])) : ?>
         <?php print_r($_SESSION['carrito']); ?>
-        <form action="carrito/vaciar.php">
-            <button style="margin: .2em .2em; padding: .3em 1.5em;">Vaciar carrito</button>
+        <form action="/carrito/vaciar.php">
+            <button>Vaciar carrito</button>
         </form>
     <?php endif ?>
 
-    <form action="expirar_cookie.php">
-    <button style="margin: .2em .2em; padding: .3em 1.5em;" >Expirar cookie</button>
+    <form action="/expirar_cookie.php">
+    <button>Expirar cookie</button>
     </form>
 
     <?php
@@ -96,7 +107,7 @@
             <button type="submit" style="margin: .5em .5em; padding: .3em 1.5em;">Filtrar</button>
         </div>
     </form>
-    <table border="1">
+    <table>
         <thead>
             <th>Nombre</th>
             <th>Fecha de alta</th>
@@ -125,7 +136,7 @@
                         <button type="submit">Modificar</button>
                     </form>
 
-                    <form action="carrito/agregar.php" method="get">
+                    <form action="/carrito/agregar.php" method="get">
                         <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
                         <button type="submit">Añadir al carrito</button>
                     </form>
@@ -141,7 +152,7 @@
         </tfoot>
     </table>
     <div>
-        <button style="margin: .5em .5em; padding: .3em 1.5em;"><a href="insertar.php">Crear nuevo empleado</a></button>
+        <button style="margin: .5em .5em; padding: .3em 1.5em;"><a href="insertar.php">Insertar nuevo empleado</a></button>
     </div>
 </body>
 </html>

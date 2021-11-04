@@ -11,6 +11,7 @@
     <?php
     /* MODIFICAR UN EMPLEADO */
     require '../comunes/auxiliar.php';
+    require 'auxiliar.php';
 
     /* if(isset($_SESSION['saludo'])) {
         var_dump($_SESSION['saludo']);

@@ -9,7 +9,8 @@
 </head>
 <body>
     <?php
-    require '../auxiliar.php';
+    require '../comunes/auxiliar.php';
+    require 'auxiliar.php';
 
     $nombre = filtrar_trim('nombre');
     $fecha_alt = filtrar_trim('fecha_alt');
@@ -63,7 +64,7 @@
     if (isset($nombre, $fecha_alt, $salario, $depart_id)
         && empty($error)) {
 
-            // Funcion en camino
+            // TODO: Función que asegura que las peticiones llegan desde la misma sesión
             if (!isset($_SESSION['token_csrf'])
                 || $token_csrf !== $_SESSION['token_csrf']) {
                 header('Location: index.html');
@@ -82,7 +83,7 @@
         ]) || $sent->rowCount() !== 1) {
             // Ha habido un error.
         }
-        tp('/index.php');
+        tp('index.php');
     }
 
     cabecera();

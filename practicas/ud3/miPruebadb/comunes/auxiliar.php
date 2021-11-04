@@ -1,7 +1,5 @@
 <?php
 
-const RUTA = '/home/emr/github/dwes21/practicas/ud3/miPruebadb';
-
 function conectar()
 {
     return new PDO(
@@ -24,58 +22,6 @@ function mostrar_error(&$error, $par)
     }
 }
 
-function mostrar_formulario(array $params, $error, $update = false)
-{
-    extract($params);
-    ?>
-    <div>
-        <form action="" method="POST">
-            <input type="hidden" name="token_csrf" value="<?= $token_csrf ?>">
-            <div>
-                <label for="nombre">Nombre:</label>
-                <input id="nombre" type="text" name="nombre"
-                    value="<?= $nombre ?>"/>
-                <?php mostrar_error($error, 'nombre') ?>
-            </div>
-
-            <div>
-                <label for="fecha_alt">Fecha de alta:</label>
-                <input id="fecha_alt" type="text" name="fecha_alt"
-                    value="<?= $fecha_alt ?>"/>
-                <?php mostrar_error($error, 'fecha_alt') ?>
-            </div>
-
-            <div>
-                <label for="salario">Salario:</label>
-                <input id="salario" type="text" name="salario"
-                    value="<?= $salario ?>"/>
-                <?php mostrar_error($error, 'salario') ?>
-            </div>
-
-            <div>
-                <label for="depart_id">ID Departamento:</label>
-                <input id="depart_id" type="text" name="depart_id"
-                    value="<?= $depart_id ?>"/>
-                <?php mostrar_error($error, 'depart_id') ?>
-            </div>
-
-            <!-- TODO: Que el texto del botón cambie si insertamos o modificamos -->
-            <div>
-                <button type="submit">
-                    <?= ($update) ? 'Modificar' : 'Insertar' ?>
-                </button>
-                <button><a href="<?= RUTA ?>/index.php">Volver</a></button>
-            </div>
-        </form>
-    </div><?php
-}
-
-/* TODO(?)
-function contar_filas()
-{
-
-} */
-
 function comprobar_cookie()
 {
     return !isset($_COOKIE['aceptar_banner']);
@@ -85,7 +31,7 @@ function banner_cookie()
 {
     if (comprobar_cookie()): ?>
         <div style="display: flex; justify-content: right; background-color: black; color: white; padding: 1em; margin: 5px 5px;">
-        <form action="<?= RUTA ?>/aceptar_cookie.php">
+        <form action="/aceptar_cookie.php">
             Este sitio usa cookies.
             <button>Aceptar</button>
         </form>
@@ -109,12 +55,12 @@ function cabecera()
 
         <?php if ($login = logueado()) : ?>
             <?= $login['username'] ?>
-            <form action="<?= RUTA ?>/usuarios/logout.php" method="POST" style="margin-left: .7em;">
-                <button style="margin: .5em .5em; padding: .3em 1.5em;" type="submit">Logout</button>
+            <form action="/usuarios/logout.php" method="POST" style="margin-left: .7em;">
+                <button style="margin: .5em .5em; padding: .3em 1.5em;" type="submit">Cerrar sesión</button>
             </form>
         <?php else: ?>
-            <form action="<?= RUTA ?>/usuarios/login.php" method="get">
-                <button style="margin: .5em .5em; padding: .3em 1.5em;" type="submit">Login</button>
+            <form action="/usuarios/login.php" method="get">
+                <button style="margin: .5em .5em; padding: .3em 1.5em;" type="submit">Iniciar sesión</button>
             </form>
         <?php endif ?>
     </div>

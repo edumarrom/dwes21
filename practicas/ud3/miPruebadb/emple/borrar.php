@@ -10,6 +10,7 @@
 <body>
     <?php
     require '../comunes/auxiliar.php';
+    require 'auxiliar.php';
 
     if (isset($_POST['id'])) {
         $id = trim($_POST['id']);
@@ -28,24 +29,24 @@
             } else {
                 // mal
             }
-            tp('/index.php');
+            tp('/emple/index.php');
         }
     } elseif (isset($_GET['id'])) {
         // Se ha recibido un GET en lugar de un POST
         $id = trim($_GET['id']);
     } else {
         // Error: Intento de acceder a este fichero directamente
-        tp('/index.php');
+        tp('/emple/index.php');
     }
     ?>
 
     <?php cabecera() ?>
 
-    <h3>Seguro que quiere borrar el empleado?</h3>
-    <form action="index.php" method="post">
+    <h3>Seguro que quiere borrar el empleado? </h3>
+    <form action="borrar.php" method="post">
         <input type="hidden" name="id" value="<?= $_GET['id']?>">
         <button type="submit">Sí</button>
-        <button><a href="/index.php">No</a></button>
+        <button><a href="/emple/index.php">No</a></button>
     </form>
 </body>
 </html>

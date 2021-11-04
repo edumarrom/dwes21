@@ -6,10 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style>
+        button {
+            margin: .2em .2em;
+            padding: .3em 1.5em;
+        }
+    </style>
 </head>
 <body>
     <?php
-    require '/comunes/auxiliar.php';
+    require '../comunes/auxiliar.php';
 
     $username = filtrar_trim('username');
     $password = filtrar_trim('password');
@@ -52,8 +58,8 @@
                     value="<?= $username ?>">
             <label for="password">Contraseña:</label>
             <input type="password" name="password" id="password">
-            <button style="margin: .2em .2em; padding: .3em 1.5em;" type="submit">Login</button>
-            <button style="margin: .2em .2em; padding: .3em 1.5em;"><a href="/index.php">Volver</a></button>
+            <button type="submit">Acceder</button>
+            <button><a href="index.php">Volver</a></button>
         </form>
     </div>
 </body>
