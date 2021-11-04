@@ -1,6 +1,7 @@
 <?php
+namespace X;
 
-use JetBrains\PhpStorm\Deprecated;
+/* use JetBrains\PhpStorm\Deprecated; */
 
 class Departamento
 {

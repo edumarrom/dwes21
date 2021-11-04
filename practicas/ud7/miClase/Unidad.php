@@ -1,15 +1,24 @@
 <?php
 /* Unidad es un departamento con características extras */
+
+namespace Y;    // todo lo que cuelga pertenece al espacio Y
+
+use X\Departamento; // Esto esta en otro espacio
+
+/* use const X\PI; */
+
 require 'Departamento.php';
 
-class Unidad extends Departamento
+
+
+class Unidad extends Departamento // Tambien \X\Departamento
 {
     private $presupuesto;
 
     public function __construct(
         $denom = null,
         $localidad = null,
-        $presupuesto = null
+        $presupuesto = null,
     )
     {
         parent::__construct($denom, $localidad);
