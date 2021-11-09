@@ -71,6 +71,7 @@
     $pdo = conectar();
 
     if (isset($depart_id)) {
+        $depart_id = (string) $depart_id;
         if (!ctype_digit($depart_id)) {
             $error['depart_id'] = 'El departamento no existe.';
         } else {
@@ -84,7 +85,8 @@
         }
     }
 
-    if (isset($nombre, $fecha_alt,  $salario, $depart_id)
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'   // Revision en clase
+        && isset($nombre, $fecha_alt,  $salario, $depart_id)
         && empty($error)) {
         $sent = $pdo->prepare('UPDATE emple
                                   SET nombre = :nombre
