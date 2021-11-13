@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar</title>
+    <title>Modificar un empleado</title>
 </head>
 <body>
     <?php
@@ -25,7 +25,7 @@
     if (isset($id)) {
         if (!ctype_digit($id)) {
             $_SESSION['mensaje_error'] = 'El ID no es correcto'.
-            tp('index.php');
+            tp('/emple/index.php');
         }
         $sent = $pdo->prepare('SELECT *
                                  FROM emple
@@ -35,11 +35,11 @@
 
         if ($fila === false) {
             // Error
-            tp('index.php');
+            tp('/emple/index.php');
         }
     } else {
         // Error
-        tp('index.php');
+        tp('/emple/index.php');
     }
 
 
@@ -101,7 +101,7 @@
             ':depart_id' => $depart_id,
             ':id' => $id
         ]);
-        tp('index.php');
+        tp('/emple/index.php');
     }
 
     cabecera();

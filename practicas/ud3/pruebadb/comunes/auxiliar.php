@@ -49,7 +49,7 @@ function cabecera()
 {
     banner_cookie(); ?>
     <div style="display: flex; justify-content: left;">
-        <h3>Mi PruebaDB</h3>
+        <h1>PruebaDB - Eduardo Martínez Romero</h1>
     </div>
     <div style="display: flex; justify-content: right;">
 
@@ -60,14 +60,30 @@ function cabecera()
             </form>
         <?php else: ?>
             <form action="/usuarios/login.php" method="get">
-                <button style="margin: .5em .5em; padding: .3em 1.5em;" type="submit">Iniciar sesión</button>
+                <button style="margin: 0 .5em; padding: .3em 1.5em; display: float" type="submit">Iniciar sesión</button>
             </form>
         <?php endif ?>
     </div>
-
+    <!-- Función de carrito -->
+    <!-- <?php carrito(); ?> -->
     <hr><?php
 
     return $login;
+}
+
+function carrito()
+{
+    // TODO: Quien crea el carrito, debe ser cualquier sitio donde sea necesario.
+    if(!isset($_SESSION['carrito'])) {
+        $_SESSION['carrito'] = [];
+    }
+
+    if(isset($_SESSION['carrito'])) : ?>
+        <?php print_r($_SESSION['carrito']); ?>
+        <form action="/carrito/vaciar.php">
+            <button>Vaciar carrito</button>
+        </form>
+    <?php endif;
 }
 
 function hh($cadena)

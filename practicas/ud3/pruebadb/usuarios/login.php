@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Iniciar sesión</title>
     <style>
         button {
             margin: .2em .2em;
@@ -51,13 +51,14 @@
     <?php endforeach;
     ?>
 
-    <div>
+    <div style="display: flex; justify-content: center;">
         <form action="" method="post">
-            <label for="username">Usuario:</label>
+            <label for="username"><h3>Usuario:</h3></label>
             <input type="text" name="username" id="username"
                     value="<?= $username ?>">
-            <label for="password">Contraseña:</label>
+            <label for="password"><h3>Contraseña:</h3></label>
             <input type="password" name="password" id="password">
+            <br>
             <button type="submit">Acceder</button>
             <button><a href="index.php">Volver</a></button>
         </form>

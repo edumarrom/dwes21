@@ -67,7 +67,7 @@
             // TODO: Función que asegura que las peticiones llegan desde la misma sesión
             if (!isset($_SESSION['token_csrf'])
                 || $token_csrf !== $_SESSION['token_csrf']) {
-                header('Location: index.html');
+                tp('/emple/index.html');
                 return;
             }
 
@@ -83,7 +83,7 @@
         ]) || $sent->rowCount() !== 1) {
             // Ha habido un error.
         }
-        tp('index.php');
+        tp('/emple/index.html');
     }
 
     cabecera();

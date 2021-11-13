@@ -28,7 +28,7 @@
         <?php unset($_SESSION['mensaje_error']) ?>
     <?php endif ?>
 
-    <?php
+    <!-- <?php
     // TODO: Quien crea el carrito, debe ser cualquier sitio donde sea necesario.
     if(!isset($_SESSION['carrito'])) {
         $_SESSION['carrito'] = [];
@@ -43,7 +43,7 @@
 
     <form action="/expirar_cookie.php">
     <button>Expirar cookie</button>
-    </form>
+    </form> -->
 
     <?php
 
@@ -117,10 +117,10 @@
                         <button type="submit">Modificar</button>
                     </form>
 
-                    <form action="/carrito/agregar.php" method="get">
+                    <!-- <form action="/carrito/agregar.php" method="get">
                         <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
                         <button type="submit">Añadir al carrito</button>
-                    </form>
+                    </form> -->
                 </td>
             </tr>
             <?php endforeach ?>
@@ -134,6 +134,7 @@
     </table>
     <div>
         <button style="margin: .5em .5em; padding: .3em 1.5em;"><a href="insertar.php">Insertar nuevo departamento</a></button>
+        <button style="margin: .2em .2em; padding: .3em 1.5em;"><a href="/index.php">Volver</a></button>
     </div>
 </body>
 </html>
