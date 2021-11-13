@@ -60,7 +60,7 @@
     mostrar_formulario(
         compact(
             'denom',
-            'localidad'
+            'localidad',
         ), $error);
     ?>
 </body>
