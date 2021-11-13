@@ -107,12 +107,12 @@
                 <td><?= $fila['denom'] ?></td>
                 <td><?= $fila['localidad'] ?></td>
                 <td>
-                    <form action="borrar.php" method="get">
+                    <form action="/depart/borrar.php" method="get">
                         <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
                         <button type="submit">Borrar</button>
                     </form>
 
-                    <form action="modificar.php" method="get">
+                    <form action="/depart/modificar.php" method="get">
                         <input type="hidden" name="id" value="<?=$fila['id']?>"></input>
                         <button type="submit">Modificar</button>
                     </form>
